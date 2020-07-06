@@ -59,11 +59,6 @@ public:
     QPoint  cvtRelativeToAbsolutePoint(QPointF);
     QPointF cvtAbsoluteToRelativePoint(QPoint);
 
-signals:
-    void Mouse_Moved();
-    void Mouse_Pressed();
-    void Mouse_Release();
-
 private:
     int             m_focusedObjectLabel;
     QString         m_foucsedObjectName;

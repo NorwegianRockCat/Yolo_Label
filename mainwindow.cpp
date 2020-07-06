@@ -259,7 +259,7 @@ void MainWindow::set_label_color(const int index, const QColor color)
 
 void MainWindow::pjreddie_style_msgBox(QMessageBox::Icon icon, QString title, QString content)
 {
-    QMessageBox msgBox(icon, title, content, QMessageBox::Ok);
+    QMessageBox msgBox(icon, title, content, QMessageBox::Ok, this);
 
     QFont font;
     font.setBold(true);
@@ -277,9 +277,9 @@ void MainWindow::open_img_dir(bool& ret)
     pjreddie_style_msgBox(QMessageBox::Information,"Help", "Step 1. Open Your Data Set Directory");
 
     QString imgDir = QFileDialog::getExistingDirectory(
-                nullptr,
+                this,
                 tr("Open Dataset Directory"),
-                "./",QFileDialog::ShowDirsOnly);
+                QString(),QFileDialog::ShowDirsOnly);
 
     QDir dir(imgDir);
 
@@ -308,9 +308,9 @@ void MainWindow::open_obj_file(bool& ret)
     pjreddie_style_msgBox(QMessageBox::Information,"Help", "Step 2. Open Your Label List File(*.txt or *.names)");
 
     QString fileLabelList = QFileDialog::getOpenFileName(
-                nullptr,
+                this,
                 tr("Open LabelList file"),
-                "./",
+                QString(),
                 tr("LabelList Files (*.txt *.names)"));
 
     if(fileLabelList.size() == 0)
@@ -350,7 +350,7 @@ void MainWindow::on_pushButton_next_clicked()
 
 void MainWindow::keyPressEvent(QKeyEvent * event)
 {
-    cout << "key pressed" <<endl;
+    // cout << "key pressed" <<endl;
     int     nKey = event->key();
 
     bool    graveAccentKeyIsPressed    = (nKey == Qt::Key_QuoteLeft);

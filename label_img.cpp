@@ -23,17 +23,16 @@ label_img::label_img(QWidget *parent)
 
 void label_img::mouseMoveEvent(QMouseEvent *ev)
 {
-    std::cout<< "moved"<< std::endl;
+    // std::cout<< "moved"<< std::endl;
 
     setMousePosition(ev->x(), ev->y());
 
     showImage();
-    emit Mouse_Moved();
 }
 
 void label_img::mousePressEvent(QMouseEvent *ev)
 {
-    std::cout<< "clicked"<< std::endl;
+    // std::cout<< "clicked"<< std::endl;
 
     setMousePosition(ev->x(), ev->y());
 
@@ -69,13 +68,11 @@ void label_img::mousePressEvent(QMouseEvent *ev)
         }
     }
 
-    emit Mouse_Pressed();
 }
 
-void label_img::mouseReleaseEvent(QMouseEvent *ev)
+void label_img::mouseReleaseEvent(QMouseEvent *)
 {
-    std::cout<< "released"<< std::endl;
-    emit Mouse_Release();
+    // std::cout<< "released"<< std::endl;
 }
 
 void label_img::init()
@@ -234,12 +231,12 @@ void label_img::drawCrossLine(QPainter& painter, QColor color, int thickWidth)
 
     QPoint absolutePoint = cvtRelativeToAbsolutePoint(m_relative_mouse_pos_in_ui);
 
-    std::cout <<"absolutePoint.x() = "<< absolutePoint.x() << std::endl;
+    // std::cout <<"absolutePoint.x() = "<< absolutePoint.x() << std::endl;
     //draw cross line
     painter.drawLine(QPoint(absolutePoint.x(),0), QPoint(absolutePoint.x(), this->height() - 1));
     painter.drawLine(QPoint(0,absolutePoint.y()), QPoint(this->width() - 1, absolutePoint.y()));
 
-    std::cout << "draw Cross Line" << std::endl;
+    // std::cout << "draw Cross Line" << std::endl;
 }
 
 void label_img::drawFocusedObjectBox(QPainter& painter, Qt::GlobalColor color, int thickWidth)
