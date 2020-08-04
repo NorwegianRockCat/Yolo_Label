@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
 #include <QFileDialog>
 #include <QColorDialog>
 #include <QKeyEvent>
@@ -48,7 +47,7 @@ void MainWindow::on_pushButton_open_files_clicked()
     if (!bRetImgDir) return ;
 
     open_obj_file(bRetObjFile);
-
+a
     if (!bRetObjFile) return ;
 
     init();
@@ -281,6 +280,11 @@ void MainWindow::open_img_dir(bool& ret)
                 tr("Open Dataset Directory"),
                 QString(),QFileDialog::ShowDirsOnly);
 
+    if (imgDir.isEmpty()) {
+	ret = false;
+	return;
+    }
+    
     QDir dir(imgDir);
 
     QStringList fileList = dir.entryList(
@@ -290,7 +294,7 @@ void MainWindow::open_img_dir(bool& ret)
     if(fileList.empty())
     {
         ret = false;
-        pjreddie_style_msgBox(QMessageBox::Critical,"Error", "This folder is empty");
+        pjreddie_style_msgBox(QMessageBox::Critical,"Error", tr("This folder (%1) contains no images").arg(imgDir));
     }
     else
     {
@@ -310,7 +314,7 @@ void MainWindow::open_obj_file(bool& ret)
     QString fileLabelList = QFileDialog::getOpenFileName(
                 this,
                 tr("Open LabelList file"),
-                QString(),
+                m_imgDir,
                 tr("LabelList Files (*.txt *.names)"));
 
     if(fileLabelList.size() == 0)
