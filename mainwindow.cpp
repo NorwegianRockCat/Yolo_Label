@@ -47,7 +47,7 @@ void MainWindow::on_pushButton_open_files_clicked()
     if (!bRetImgDir) return ;
 
     open_obj_file(bRetObjFile);
-a
+
     if (!bRetObjFile) return ;
 
     init();
