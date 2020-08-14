@@ -191,7 +191,7 @@ void MainWindow::prev_label()
     set_label(m_objIndex - 1);
 }
 
-void MainWindow::load_label_list_data(QString qstrLabelListFile)
+void MainWindow::load_label_list_data(const QString &qstrLabelListFile)
 {
     ifstream inputLabelListFile(qstrLabelListFile.toStdString());
 
@@ -230,7 +230,7 @@ void MainWindow::load_label_list_data(QString qstrLabelListFile)
     }
 }
 
-QString MainWindow::get_labeling_data(QString qstrImgFile)const
+QString MainWindow::get_labeling_data(const QString &qstrImgFile)const
 {
     string strImgFile = qstrImgFile.toStdString();
     string strLabelData = strImgFile.substr(0, strImgFile.find_last_of('.')) + ".txt";
@@ -284,7 +284,16 @@ void MainWindow::open_img_dir(bool& ret)
 	ret = false;
 	return;
     }
-    
+    ret = load_image_dir(imgDir);
+}
+
+/**
+ * Open the directory and get a list of all the files
+ * Assumes that imgDir is a proper path
+ */
+bool MainWindow::load_image_dir(const QString &imgDir)
+{
+    bool ret = false;
     QDir dir(imgDir);
 
     QStringList fileList = dir.entryList(
@@ -305,6 +314,7 @@ void MainWindow::open_img_dir(bool& ret)
         for(QString& str: m_imgList)
             str = m_imgDir + "/" + str;
     }
+    return ret;
 }
 
 void MainWindow::open_obj_file(bool& ret)

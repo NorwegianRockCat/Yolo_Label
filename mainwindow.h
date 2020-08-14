@@ -20,6 +20,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    bool load_image_dir(const QString &dir);
+    void load_label_list_data(const QString &);
+    void init();
 
 private slots:
     void on_pushButton_open_files_clicked();
@@ -45,8 +48,9 @@ private slots:
 
     void on_horizontalSlider_images_sliderMoved(int );
 
+
+
 private:
-    void            init();
     void            init_table_widget();
     void            init_button_event();
     void            init_horizontal_slider();
@@ -57,8 +61,7 @@ private:
 
     void            goto_img(const int);
 
-    void            load_label_list_data(QString);
-    QString         get_labeling_data(QString)const;
+    QString         get_labeling_data(const QString &)const;
 
     void            set_label(const int);
     void            set_label_color(const int , const QColor);
